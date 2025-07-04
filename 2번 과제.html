@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>회원가입 폼</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 10px;
+      background: #f5f5f5;
+      border-radius: 8px;
+    }
+    h1 {
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 10px;
+      background: #007bff;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .error {
+      color: red;
+      margin-top: 5px;
+    }
+    .success {
+      color: green;
+      margin-top: 10px;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>회원가입</h1>
+  <form id="signupForm" novalidate>
+    <label for="username">아이디</label>
+    <input type="text" id="username" name="username" placeholder="아이디를 입력하세요" />
+
+    <label for="email">이메일</label>
+    <input type="email" id="email" name="email" placeholder="이메일을 입력하세요" />
+
+    <label for="password">비밀번호</label>
+    <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" />
+
+    <label for="passwordConfirm">비밀번호 확인</label>
+    <input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="비밀번호를 다시 입력하세요" />
+
+    <button type="submit">가입하기</button>
+
+    <div id="message"></div>
+  </form>
+
+  <script>
+    const form = document.getElementById('signupForm');
+    const message = document.getElementById('message');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // 폼 제출 막기 (새로고침 방지)
+      message.textContent = '';
+      message.className = '';
+
+      // 입력 값 가져오기
+      const username = form.username.value.trim();
+      const email = form.email.value.trim();
+      const password = form.password.value;
+      const passwordConfirm = form.passwordConfirm.value;
+
+      // 빈칸 체크
+      if (!username) {
+        showMessage('아이디를 입력하세요.', 'error');
+        form.username.focus();
+        return;
+      }
+
+      if (!email) {
+        showMessage('이메일을 입력하세요.', 'error');
+        form.email.focus();
+        return;
+      }
+
+      if (!password) {
+        showMessage('비밀번호를 입력하세요.', 'error');
+        form.password.focus();
+        return;
+      }
+
+      if (!passwordConfirm) {
+        showMessage('비밀번호 확인을 입력하세요.', 'error');
+        form.passwordConfirm.focus();
+        return;
+      }
+
+      // 이메일 간단 검증 (정규표현식 아님, '@' 포함여부만 체크)
+      if (!email.includes('@')) {
+        showMessage('올바른 이메일을 입력하세요.', 'error');
+        form.email.focus();
+        return;
+      }
+
+      // 비밀번호 일치 체크
+      if (password !== passwordConfirm) {
+        showMessage('비밀번호가 일치하지 않습니다.', 'error');
+        form.passwordConfirm.focus();
+        return;
+      }
+
+      // 성공 메시지
+      showMessage('회원가입이 완료되었습니다!', 'success');
+
+      // (실제 회원가입 처리하는 부분은 여기서 진행)
+      // 폼 초기화
+      form.reset();
+    });
+
+    function showMessage(msg, type) {
+      message.textContent = msg;
+      message.className = type;
+    }
+  </script>
+
+</body>
+</html>

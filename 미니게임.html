@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>미니 게임</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      margin-top: 50px;
+    }
+    #boss {
+      width: 150px;
+      height: 150px;
+      background-color: red;
+      margin: 20px auto;
+      cursor: pointer;
+      line-height: 150px;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+      border-radius: 10px;
+      user-select: none;
+    }
+    input {
+      font-size: 16px;
+      width: 60px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>미니 게임</h1>
+  <p>보스를 클릭해서 체력을 깎으세요!</p>
+
+  <p>
+    공격력 입력: <input type="number" id="attackPower" value="50" min="1" />
+  </p>
+
+  <div id="boss">보스</div>
+  <p>남은 체력: <span id="hp">1000</span></p>
+
+  <script>
+    const boss = document.getElementById('boss');
+    const hpDisplay = document.getElementById('hp');
+    const attackInput = document.getElementById('attackPower');
+
+    let hp = 1000;
+
+    boss.addEventListener('click', () => {
+      if (hp <= 0) return;
+
+      // 입력값 가져오기
+      let attackPower = parseInt(attackInput.value);
+      if (isNaN(attackPower) || attackPower < 1) {
+        alert('공격력은 1 이상의 숫자로 입력해주세요!');
+        return;
+      }
+
+      hp -= attackPower;
+      if (hp < 0) hp = 0;
+
+      hpDisplay.textContent = hp;
+
+      if (hp === 0) {
+        alert('게임 종료! 보스를 물리쳤어요!');
+      }
+    });
+  </script>
+
+</body>
+</html>
