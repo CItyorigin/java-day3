@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>회원가입 폼</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>회원가입</h1>
+  <form id="signupForm">
+    <label>이름:
+      <input type="text" id="name" required>
+    </label>
+    <span class="error" id="nameError"></span>
+
+    <label>이메일:
+      <input type="email" id="email" required>
+    </label>
+    <span class="error" id="emailError"></span>
+
+    <label>비밀번호:
+      <input type="password" id="password" required>
+    </label>
+    <span class="error" id="passwordError"></span>
+
+    <label>비밀번호 확인:
+      <input type="password" id="confirmPassword" required>
+    </label>
+    <span class="error" id="confirmError"></span>
+
+    <button type="submit">가입하기</button>
+  </form>
+
+  <script src="script.js"></script>
+</body>
+</html>
